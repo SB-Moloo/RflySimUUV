@@ -1,128 +1,129 @@
-<h1>目录描述</h1>
+# Directory Description
 
 <ol>
 
 <li>
-<code>./UUV</code> 该文件夹主要包含无人潜航器的模型、相机参数和启动脚本等。
+<code>./UUV</code> This folder mainly contains the Unmanned Underwater Vehicle (UUV) model, camera parameters, and launch scripts.
 <ol>
 <li>
-<code>Config.json</code> 是双目相机的参数文件。
-通过修改<code>TypeID</code>参数可以实现修改传感器类型。<code>TypeID=1</code>为RGB图，<code>TypeID=1</code>为灰度图，<code>TypeID=1</code>为深度图。
+<code>Config.json</code> is the parameter file for the stereo camera.  
+Changing the <code>TypeID</code> parameter allows you to modify the sensor type. <code>TypeID=1</code> corresponds to RGB images, <code>TypeID=2</code> to grayscale images, and <code>TypeID=3</code> to depth images.
 </li>
 <li>
-<code>UUV.params</code> 是无人潜航器的PD控制参数，用于硬件在环仿真。
+<code>UUV.params</code> are the PD control parameters for the UUV, used in Hardware-in-the-Loop (HITL) simulations.
 </li>
 <li>
-<code>px4_fmu-v6c_default.px4</code> 是无人潜航器的硬件在环飞控固件，用于硬件在环仿真。适用于PX4的6c型号，如果型号不对应，也可以见后文的编译固件教程。
+<code>px4_fmu-v6c_default.px4</code> is the HITL flight controller firmware for the UUV targeting the PX4 FMU v6c hardware. For other versions, refer to the firmware compilation tutorial below.
 </li>
 <li>
-<code>UUVModel.dll</code> 是无人潜航器的动力学模型文件，由Simulink编写并生成，用于CopterSim软件。该文件应与一键启动脚本在同一目录下。
+<code>UUVModel.dll</code> is the dynamics model of the UUV, developed using Simulink and compiled for use in CopterSim software. This file should be in the same directory as the one-click launch script.
 </li>
 <li>
-<code>UUVModel_HITL.bat</code> 是无人潜航器的硬件在环（UE4）的一键启动脚本。
+<code>UUVModel_HITL.bat</code> is the one-click launch script for HITL simulation with UE4.
 </li>
 <li>
-<code>UUVModel_SITL.bat</code> 是无人潜航器的软件在环（UE4）的一键启动脚本。
+<code>UUVModel_SITL.bat</code> is the one-click launch script for Software-in-the-Loop (SITL) simulation with UE4.
 </li>
 <li>
-<code>UUVModel_HITLUE5.bat</code> 是无人潜航器的硬件在环（UE5）的一键启动脚本。
+<code>UUVModel_HITLUE5.bat</code> is the one-click launch script for HITL simulation with UE5.
 </li>
 <li>
-<code>UUVModel_SITLUE5.bat</code> 是无人潜航器的软件在环（UE5）的一键启动脚本。
+<code>UUVModel_SITLUE5.bat</code> is the one-click launch script for SITL simulation with UE5.
 </li>
 </ol>
 </li>
 
 <li>
-<code>./Demo</code> 该文件夹主要包含无人潜航器的控制Demo代码。
-UUVAttCtrlCamera.py
-</li>
+<code>./Demo</code> This folder mainly contains the UUV control demo code.
 <ol>
 <li>
-<code>UUVAttCtrlCamera.py</code> 是相机的示例程序（没有启动ROS发布）。
+<code>UUVAttCtrlCamera.py</code> is a sample program for the camera (does not start ROS publishing).
 </li>
 <li>
-<code>UUVAttCtrlPath.py</code> 是潜航器控制的示例程序。
+<code>UUVAttCtrlPath.py</code> is a sample program for UUV control.
 </li>
 </ol>
 </li>
 
 <li>
-<code>./euroc_uuv</code> 该文件夹主要包含Vins订阅的话题的配置，运行融合定位，需要使用该配置。
+<code>./euroc_uuv</code> This folder mainly contains configurations for topics used in Vins subscriptions. To run the fusion localization, this configuration is required.
 </li>
 
 <li>
-<code>./FusionLocation</code> 该文件夹主要包含无人潜航器的融合定位代码。
+<code>./FusionLocation</code> This folder contains the fusion localization code for the UUV.
 <ol>
 <li>
-<code>Config.json</code> 也是双目相机的参数文件。和UUV目录中的一样，该文件需要和启动取图的代码在同一目录下。
+<code>Config.json</code> is also the parameter file for the stereo camera. It is the same as the one in the UUV directory, and this file needs to be in the same directory as the image-capturing code.
 </li>
 <li>
-<code>kf.py</code> 是卡尔曼滤波代码。
+<code>kf.py</code> is the Kalman filter code.
 </li>
 <li>
-<code>UUVAtt_server.py</code> 是无人潜航器的远程控制程序（可以远程运行）。
+<code>UUVAtt_server.py</code> is the remote control program for the UUV (can be run remotely).
 </li>
 <li>
-<code>relocate.py</code> 是Vins的重定位程序。
+<code>relocate.py</code> is the relocalization program for VINS.
 </li>
 <li>
-<code>ropeInfo_generator.py</code> 是绳索定位程序。
+<code>ropeInfo_generator.py</code> is the rope localization program.
 </li>
 <li>
-<code>path_fusion.py</code> 是定位融合程序。
+<code>path_fusion.py</code> is the position fusion program.
 </li>
 <li>
-<code>oneKeyScript.sh</code> 是所有程序的一键启动脚本。
+<code>oneKeyScript.sh</code> is the one-click startup script for all programs.
 </li>
 </ol>
 </li>
 
 </ol>
 
-<h1>软件在环启动</h1>
+# Starting Software-in-the-Loop (SITL)
+
 <ol>
 <li>
-以管理员方式运行：<code>./UUV/UUVModel_SITL.bat</code>，并输入<code>1</code>来创建一架飞机。该脚本会打开CopterSim、QGroundControl和RflySim3D。
+Run the following script as administrator: <code>./UUV/UUVModel_SITL.bat</code>, and input <code>1</code> to create an aircraft. This script will open CopterSim, QGroundControl, and RflySim3D.
 </li>
 <li>
-运行Demo文件夹中的示例程序。
+Run the example programs located in the Demo folder.
 </li>
 </ol>
 
-<h1>硬件在环启动</h1>
+# Starting Hardware-in-the-Loop (HITL)
+
 <ol>
 <li>
-在准备运行仿真平台的主机中，使用USB插入刷好固件飞控硬件。
+On the host machine running the simulation platform, plug in the flight controller hardware (with firmware already flashed) via USB.
 </li>
 <li>
-以管理员方式运行：<code>./UUV/UUVModel_HITL.bat</code>，并输入对应的端口号，端口号会在命令行窗口中提示。该脚本会打开CopterSim、QGroundControl和RflySim3D。
+Run the following script as administrator: <code>./UUV/UUVModel_HITL.bat</code>, and input the corresponding COM port number when prompted. The port number will be displayed in the command line window. This script will open CopterSim, QGroundControl, and RflySim3D.
 </li>
 <li>
-运行Demo文件夹中的示例程序。
+Run the example programs located in the Demo folder.
 </li>
 </ol>
 
-<h1>融合定位启动</h1>
+# Starting Fusion Localization
+
 <ol>
 <li>
-准备一台Ubuntu虚拟机，安装好Python3.8。
+Prepare an Ubuntu virtual machine and install Python 3.8.
 </li>
 <li>
-下载并编译好<a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion" title="Vins-fusion">vins</a>，使用<code>./euroc_uuv</code>中的配置。
+Download and compile <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion" title="Vins-fusion">VINS-Fusion</a>, using the configurations provided in the <code>./euroc_uuv</code> folder.
 </li>
 <li>
-将<code>./FusionLocation</code>目录复制到虚拟机。
+Copy the <code>./FusionLocation</code> directory to the virtual machine.
 </li>
 <li>
-将平台API目录中的<code>RflySimSDK</code>文件夹复制到虚拟机中，并运行<code>ReLabPath.py</code>脚本来加载平台提供的Python接口（每次更新平台需要重新加载）。
+Copy the <code>RflySimSDK</code> folder from the platform API directory to the virtual machine, and run <code>ReLabPath.py</code> to load the Python interface provided by the platform (this must be done after each platform update).
 </li>
 <li>
-以管理员方式运行：<code>./UUV/UUVModel_SITLUE5.bat</code>或<code>./UUV/UUVModel_HITLUE5.bat</code>来启动仿真平台。
+Run either <code>./UUV/UUVModel_SITLUE5.bat</code> or <code>./UUV/UUVModel_HITLUE5.bat</code> as administrator to start the simulation platform.
 </li>
 <li>
-在虚拟机中运行<code>oneKeyScript.sh</code>来一键启动融合定位程序
+On the virtual machine, run <code>oneKeyScript.sh</code> to start the fusion localization process in one click.
 </li>
 </ol>
 
-Note: 以上需要运行在RflySim平台，平台下载和更详细的教程请见：<a href="www.rflysim.com" title="Rflysim">www.rflysim.com</a>
+Note: All the above steps require the RflySim platform. For more information and detailed tutorials, please visit: <a href="www.rflysim.com" title="Rflysim">www.rflysim.com</a>
